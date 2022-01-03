@@ -1,0 +1,17 @@
+# required to specify the docker compose version to use
+version: '3'
+# services refers to the containers we want to start with docker compose
+services:
+  # the tag for the redis image, this can be used with the redis client installed with npm
+  redis-server:
+    image: 'redis'
+  # the tag for the node js app
+  node-app:
+    # Restart policy set to always which means that docker should attempt to restart the container whenever it stops
+    # there's also no, on-failure and unless-stopped
+    restart: always
+    # we use the dot as the context similar to docker build .
+    build: .
+    # the port mapping
+    ports:
+      - '4000:8081'
